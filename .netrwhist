@@ -1,0 +1,9 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhist_cnt =7
+let g:netrw_dirhist_1='/home/ilmarik/workspace/pylon/pylon/templates'
+let g:netrw_dirhist_2='/etc/conky'
+let g:netrw_dirhist_3='/home/ilmarik/workspace/pylon/data/cache/container_dbm'
+let g:netrw_dirhist_4='/usr/share/vim/vim72/syntax'
+let g:netrw_dirhist_5='/home/ilmarik/.vim/plugin'
+let g:netrw_dirhist_6='/home/gregory/workspace/flights/ypsilon/trunk/include/flt/default_lowcost/screens/maps'
+let g:netrw_dirhist_7='/home/gregory/workspace/flights/libraries'
