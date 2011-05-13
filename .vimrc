@@ -2,7 +2,7 @@
 "highlight ExtraWhitespace guibg=red
 "hi LongLine guibg=#0a165e
 
-colorscheme blackboard
+colorscheme mustang
 filetype plugin indent on
 
 autocmd FileType *.html set ft=xhtml " For SnipMate
@@ -60,7 +60,7 @@ set foldlevel=0
 
 set tags=~/workspace/**/tags
 set laststatus=2
-set statusline=%F%=[%l/%L][%p%%][%{&encoding}]%y
+set statusline=%F%=[%l/%L:%c][%p%%][%{&encoding}]%y
 set cursorline
 au InsertEnter * hi StatusLine guifg=#00CCFF guibg=#444444 gui=bold
 au InsertLeave * hi StatusLine guifg=#f6f3e8 guibg=#444444 gui=reverse
@@ -81,14 +81,15 @@ map <C-left> :tabp<CR>
 map <C-right> :tabn<CR>
 map <C-w> :tabclose<CR>
 map <A-w> :bd<CR>
+nnoremap <C-a> gg<s-v><s-g>
 "For vimrc edit/reload"
 nmap <Leader>s :source $MYVIMRC<CR>
 nmap <Leader>v :e $MYVIMRC<CR>
 nnoremap <silent> <F2> :FufFileWithCurrentBufferDir<CR>
 " Press F4 to toggle highlighting on/off.
 nnoremap <silent> <F4> :set hls!<CR>
-"nnoremap <silent> <F5> :!python $HOME/.vim/plugin/pep8.py --show-source --statistics %<CR>
-"nnoremap <silent> <F5> :!python $HOME/Downloads/item.py --show-source --statistics %<CR>
+nnoremap <silent> <F3> :!python $HOME/.vim/plugin/pep8.py --show-source --statistics %<CR>
+nnoremap <silent> <F5> :!python %<CR>
 nnoremap <silent> <F6>
       \ :if exists('w:long_line_match') <Bar>
       \   silent! call matchdelete(w:long_line_match) <Bar>

@@ -210,8 +210,8 @@ def maximum_line_length(physical_line):
     length to 72 characters is recommended.
     """
     length = len(physical_line.rstrip())
-    if length > 79:
-        return 79, "E501 line too long (%d characters)" % length
+    if length > 179:
+        return 179, "E501 line too long (%d characters)" % length
 
 
 ##############################################################################
