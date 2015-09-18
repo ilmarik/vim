@@ -47,8 +47,6 @@ snippet property
 # Lambda
 snippet ld
 	${1:var} = lambda ${2:vars} : ${3:action}
-snippet .
-	self.
 snippet try Try/Except
 	try:
 		${1:pass}
@@ -83,4 +81,5 @@ snippet ifmain
 		${1:main()}
 # __magic__
 snippet _
-	__${1:init}__${2}
+	def __${1:init}__(self${2:, arg}):
+		${3}

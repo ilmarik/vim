@@ -1,12 +1,24 @@
-"autocmd Syntax * syn match ExtraWhitespace /\s\+$\| \+\ze\t/
-"highlight ExtraWhitespace guibg=red
-"hi LongLine guibg=#0a165e
+set nocompatible
+"set background=light
+set background=dark
+"colorscheme blackboard
+colorscheme solarized
 
-colorscheme mustang
 filetype plugin indent on
+"set lines=110 columns=300
+
+"autocmd Syntax * syn match ExtraWhitespace /\s\+$\| \+\ze\t/ 
+
+"if has("gui_running")
+"    hi SpellBad term=underline gui=undercurl guisp=Orange guifg=Orange
+"endif
 
 autocmd FileType *.html set ft=xhtml " For SnipMate
 autocmd FileType htmldjango set ft=htmldjango.django " For SnipMate
+"autocmd BufNewFile,BufRead *.yaml,*.yml so ~/.vim/yaml.vim
+"autocmd BufRead,BufNewFile *.js set ft=javascript.jquery
+"autocmd FileType python set omnifunc=pythoncomplete#Complete
+"autocmd FileType python set ft=python.django " For SnipMate
 
 "set background=dark
 "syntax on
@@ -15,20 +27,26 @@ autocmd FileType htmldjango set ft=htmldjango.django " For SnipMate
 "filetype plugin on     " enables filetype specific plugins
 set ruler
 "let python_highlight_all=1
-set backspace=start,eol,indent
+" set backspace=start,eol,indent
+set number
+set autoindent
+set smartindent
+set backspace=indent,eol,start
 set clipboard+=unnamed
 set fileformats=unix,dos,mac
-set lcs=tab:>-,eol:<,nbsp:%,trail:-,extends:>,precedes:<
+"set lcs=tab:>-,eol:<,nbsp:%,trail:-,extends:>,precedes:<
+""set list listchars=eol:¬,tab:»\ ,trail:·,extends:·
 set noerrorbells
-set smartindent
+
+set nobackup
+set nowritebackup
+set noswapfile
 
 set wildignore=*.dll,*.pyc
 set wildmenu
 set wildmode=list:longest
 
-"set number
-set numberwidth=4
-
+"set numberwidth=4
 set scrolloff=1
 set completeopt=longest,menuone
 "set completeopt=menu,longest
@@ -38,13 +56,23 @@ set shiftwidth=4
 set softtabstop=4
 set expandtab
 set tabstop=4
+"set textwidth=80
+set colorcolumn=+1
 
 set guioptions=ai
-"set guifont=Inconsolata\ Medium\ 14
-set guifont=Terminus\ 10
-"set guifont=Bitstream\ Vera\ Sans\ Mono\ 9
-"set guifont=Monaco\ 12
-"set guifont=Monospace\ 12
+"set guifont=Inconsolata\ Medium\ 10
+set guifont=Terminus\ 12
+"set guifont=Terminus\ Regular\ 14
+"set guifont=Terminess\ Powerline\ 12
+"set guifont=Ubuntu\ Mono\ 12
+"set guifont=Ubuntu\ Mono\ for\ Powerline\ 12
+"set guifont=Ubuntu\ Mono\ for\ VimPowerline\ 12
+"set guifont=Terminus\ Powerline\ Regular\ 12
+"set guifont=Bitstream\ Vera\ Sans\ Mono\ 10
+"set guifont=Monaco\ 11
+"set guifont=Monospace\ 11
+"
+let g:Powerline_symbols = 'fancy'
 
 set title
 set mousehide
@@ -55,20 +83,17 @@ set incsearch
 set foldenable
 set foldmethod=indent
 set foldignore=
-set foldlevel=0
-"set foldcolumn=1
+set foldlevel=10
 
-set tags=~/workspace/**/tags
+"set tags=~/workspace/**/tags
 set laststatus=2
-set statusline=%F%=[%l/%L:%c][%p%%][%{&encoding}]%y
+set statusline=%F%=[%v][%l/%L][%p%%][%{&encoding}]%y
 set cursorline
+set wak=no
 au InsertEnter * hi StatusLine guifg=#00CCFF guibg=#444444 gui=bold
 au InsertLeave * hi StatusLine guifg=#f6f3e8 guibg=#444444 gui=reverse
-map <leader>d :execute 'NERDTreeFromBookmark w'<CR>
-map <leader>m :execute 'NERDTreeFromBookmark m'<CR>
-"autocmd BufRead,BufNewFile *.js set ft=javascript.jquery
-"autocmd FileType python set omnifunc=pythoncomplete#Complete
-autocmd FileType python set ft=python.django " For SnipMate
+
+hi Directory guifg=#FF0000 ctermfg=red
 " Make ',e' (in normal mode) give a prompt for opening files
 " in the same dir as the current buffer's file.
 if has("unix")
@@ -76,30 +101,31 @@ if has("unix")
 else
     map ,e :e <C-R>=expand("%:p:h") . "\\" <CR>
 endif
-map <A-n> :tabnew<CR>
-map <C-left> :tabp<CR>
-map <C-right> :tabn<CR>
-map <C-w> :tabclose<CR>
-map <A-w> :bd<CR>
-nnoremap <C-a> gg<s-v><s-g>
 "For vimrc edit/reload"
 nmap <Leader>s :source $MYVIMRC<CR>
 nmap <Leader>v :e $MYVIMRC<CR>
-nnoremap <silent> <F2> :FufFileWithCurrentBufferDir<CR>
+nmap <Leader>c :e $HOME/.vim/colors/blackboard.vim<CR>
+map <leader>d :execute 'NERDTreeFromBookmark w'<CR>
+map <leader>m :execute 'NERDTreeFromBookmark m'<CR>
+map <A-n> :tabnew<CR>
+map <C-left> :tabp<CR>
+map <C-right> :tabn<CR>
+nnoremap <a-left> <C-W><C-h>
+nnoremap <a-right> <C-W><C-l>
+nnoremap <a-up> <C-W><C-k>
+nnoremap <a-down> <C-W><C-j>
+"map <C-w> :tabclose<CR>
+map <A-w> :bd<CR>
+map <leader>m :execute 'NERDTreeFromBookmark m'<CR>
+"nnoremap <silent> <F2> :FufFileWithCurrentBufferDir<CR>
 " Press F4 to toggle highlighting on/off.
+"nnoremap <silent> <F3> :!python $HOME/.vim/plugin/pep8.py --show-source --statistics %<CR>
+nnoremap <silent> <F3> :!pep8 --show-source --statistics %<CR>
 nnoremap <silent> <F4> :set hls!<CR>
-nnoremap <silent> <F3> :!python $HOME/.vim/plugin/pep8.py --show-source --statistics %<CR>
-nnoremap <silent> <F5> :!python %<CR>
-nnoremap <silent> <F6>
-      \ :if exists('w:long_line_match') <Bar>
-      \   silent! call matchdelete(w:long_line_match) <Bar>
-      \   unlet w:long_line_match <Bar>
-      \ elseif &textwidth > 0 <Bar>
-      \   let w:long_line_match = matchadd('ErrorMsg', '\%>'.&tw.'v.\+', -1) <Bar>
-      \ else <Bar>
-      \   let w:long_line_match = matchadd('ErrorMsg', '\%>80v.\+', -1) <Bar>
-      \ endif<CR>
-nnoremap <silent> <F7> :NERDTreeToggle<CR>
+autocmd filetype python nnoremap <silent> <F5> :!python %<CR>
+"nnoremap <silent> <F5> :!python /home/ilmarik/workspace/3dgame/game/start.py<CR>
+autocmd filetype python nnoremap <silent> <F6> :!python /home/ilmarik/workspace/medievalike/setup.py build_ext --inplace<CR>
+"nnoremap <silent> <F7> :NERDTreeToggle<CR>
 nnoremap <silent> <F8> :TlistToggle<CR>
 nnoremap <silent> <F9> :let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar>:nohl<CR>
 nnoremap <silent> <F12> :!python $HOME/.vim/shortcuts.py<CR>
@@ -107,13 +133,6 @@ nnoremap <silent> <F12> :!python $HOME/.vim/shortcuts.py<CR>
 set makeprg=tidy\ -quiet\ -errors\ %
 set errorformat=line\ %l\ column\ %v\ -\ %m
 
-"set foldtext=MyFoldText()
-""function MyFoldText()
-""    set foldlevelstart=1
-""    let line = getline(v:foldstart)
-""    let sub = substitute(line, '/\*\|\*/\|{{{\d\=', '', 'g')
-""    return v:folddashes . sub
-"endfunction
 "Moving lines like in NetBeans (original keys -> <M-j>)"
 nnoremap <c-down> mz:m+<CR>`z==
 nnoremap <c-up> mz:m-2<CR>`z==
@@ -131,38 +150,9 @@ vnoremap <c-S> :w<CR>
 "remap of ctrl+n to more known ctrl+space"
 inoremap <c-space> <c-N>
 nnoremap <c-tab> <c-w>w
+nnoremap <c-s-tab> <c-s-w>w
 "close all opened tabs and vim
 nnoremap <c-esc> :tabonly<CR>:q!<CR>
-""let html_my_rendering=1
-" changing statusline colors when changing vim mode
-"function! InsertStatuslineColor(mode)
-"  if a:mode == 'i'
-    "hi statusline guibg=magenta
-  "elseif a:mode == 'r'
-    "hi statusline guibg=blue
-  "else
-    "hi statusline guibg=red
-  "endif
-"endfunction
-"au InsertEnter * call InsertStatuslineColor(v:insertmode)
-"au InsertLeave * hi statusline guibg=green
-" default the statusline to green when entering Vim
-" mark lines longer than 80
-"au!BufRead *.py setlocal et ts=4 sw=4 makeprg=pep8\ --repeat\ --ignore=E501\ %
-"function! Kompiluj()
-    "silent lmake
-    ""redraw!
-    "if len(getloclist(0))
-        "lopen
-    "else
-        "lclose
-    "endif
-"endfunction
-
-"autocmd BufWritePost *.py call Kompiluj()
-
-"nnoremap <silent><F9> :call Kompiluj()<CR>
-
 " Show trailing whitepace and spaces before a tab:
 "match ExtraWhitespace /\s\+$\| \+\ze\t/
 nm d<F3> lF<df>
@@ -172,12 +162,56 @@ nm <C-S-Left> d<F3>
 " Right move attribut
 nm <C-S-Right> d<F3>/ \\|><cr>:nohl<cr>P
 
-highlight RedundantSpaces ctermbg=Red guisp=Orange guifg=Orange guibg=Orange
-match RedundantSpaces /\s\+$\| \+\ze\t/
+"let g:pydiction_location = '/home/ilmarik/.vim/ftplugin/pydiction/complete-dict'
+let g:airline_powerline_fonts = 1
 
-if has("gui_running")
-    highlight SpellBad term=underline gui=undercurl guisp=Orange guifg=Orange
-endif
-autocmd BufEnter * :lcd %:p:h " cd na katalog, w którym znajduje się aktualny bufor
+function ShowSpaces(...)
+    let @/='\v(\s+$)|( +\ze\t)'
+    let oldhlsearch=&hlsearch
+    if !a:0
+        let &hlsearch=!&hlsearch
+    else
+        let &hlsearch=a:1
+    end
+    return oldhlsearch
+endfunction
 
-"let g:pydiction_location = '/home/gregory/.vim/ftplugin/pydiction/complete-dict'
+function TrimSpaces() range
+    let oldhlsearch=ShowSpaces(1)
+    execute a:firstline.",".a:lastline."substitute ///gec"
+    let &hlsearch=oldhlsearch
+endfunction
+
+command -bar -nargs=? ShowSpaces call ShowSpaces(<args>)
+command -bar -nargs=0 -range=% TrimSpaces <line1>,<line2>call TrimSpaces()
+nnoremap <F4>     :ShowSpaces 1<CR>
+nnoremap <S-F4>   m`:TrimSpaces<CR>``
+vnoremap <S-F4>   :TrimSpaces<CR>
+
+nnoremap <c-P> :CtrlP<CR>
+inoremap <c-P> <ESC>:CtrlP<CR>
+vnoremap <c-P> :CtrlP<CR>
+
+""""""""""""""""""""""""""""""""""""""""""""
+" C language help
+
+" set filetype for C files
+augroup project
+    autocmd!
+    autocmd BufRead,BufNewFile *.h,*.c set filetype=c
+    autocmd FileType c setlocal cindent
+augroup END
+" ctrl+space intelisense
+autocmd filetype c inoremap <c-space> <c-x><c-o>
+" ctrl+g to open .h file under the cursor in new tab
+map <silent> <C-G> <C-W>gf:tabm 999<CR>
+" improve make
+autocmd filetype c setlocal makeprg=gcc\ -Wall\ -Wextra\ -o\ %<\ %
+" set make under f5
+autocmd filetype c nnoremap <F5> :make! && ./%<<cr>
+autocmd filetype c nnoremap <F6> :make!<cr>
+
+"""""""""""""""""""""""""""""""""""""""""""""
+let g:ycm_global_ycm_extra_conf = "~/.vim/.ycm_extra_conf.py"
+
+call pathogen#infect()

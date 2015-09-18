@@ -1,3 +1,44 @@
 My private vim configuration.
 .vimrc tweaked a little + additional plugins like NERD, snipmate, sparkup.
 Used to work efficiently with python, xhtml/css, javascript.
+
+
+-----------------------------------------------------
+
+plugins kept in ~/.vim/bundle/ folder for pathogen pleasure.
+
+Solarized
+precision colorscheme for the vim text editor http://ethanschoonover.com/solarized
+https://github.com/altercation/vim-colors-solarized.git
+
+ag
+Vim plugin for the_silver_searcher, 'ag', a replacement for the Perl module / CLI script 'ack'
+https://github.com/rking/ag.vim.git
+
+clang
+Clang completion plugin for vim
+https://github.com/justmao945/vim-clang.git
+
+ctrlp
+Fuzzy file, buffer, mru, tag, etc finder. http://kien.github.com/ctrlp.vim
+https://github.com/kien/ctrlp.vim.git
+
+vim-airline
+lean & mean status/tabline for vim that's light as air https://github.com/bling/vim-airline
+https://github.com/bling/vim-airline.git
+
+vim-fugitive
+fugitive.vim: a Git wrapper so awesome, it should be illegal http://www.vim.org/scripts/script.php?script_id=2975
+https://github.com/tpope/vim-fugitive.git
+
+vimpdb
+Pdb and Vim integration
+https://github.com/gotcha/vimpdb.git
+
+vim-sensible
+sensible.vim: Defaults everyone can agree on http://www.vim.org/scripts/script.php?script_id=4391
+https://github.com/tpope/vim-sensible.git
+
+YouCompleteMe
+A code-completion engine for Vim http://valloric.github.io/YouCompleteMe/
+https://github.com/Valloric/YouCompleteMe.git
