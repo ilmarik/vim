@@ -1,13 +1,13 @@
 set nocompatible
-"set background=light
+
+cd ~/workspace/
+
 set background=dark
-"colorscheme blackboard
 colorscheme solarized
 
 filetype plugin indent on
 "set lines=110 columns=300
 
-"autocmd Syntax * syn match ExtraWhitespace /\s\+$\| \+\ze\t/ 
 
 "if has("gui_running")
 "    hi SpellBad term=underline gui=undercurl guisp=Orange guifg=Orange
@@ -34,7 +34,7 @@ set smartindent
 set backspace=indent,eol,start
 set clipboard+=unnamed
 set fileformats=unix,dos,mac
-"set lcs=tab:>-,eol:<,nbsp:%,trail:-,extends:>,precedes:<
+set lcs=tab:>-,eol:<,nbsp:%,trail:-,extends:>,precedes:<
 ""set list listchars=eol:¬,tab:»\ ,trail:·,extends:·
 set noerrorbells
 
@@ -42,7 +42,7 @@ set nobackup
 set nowritebackup
 set noswapfile
 
-set wildignore=*.dll,*.pyc
+set wildignore=*.dll,*.pyc,*.o
 set wildmenu
 set wildmode=list:longest
 
@@ -56,10 +56,13 @@ set shiftwidth=4
 set softtabstop=4
 set expandtab
 set tabstop=4
-"set textwidth=80
+set textwidth=120
 set colorcolumn=+1
-
 set guioptions=ai
+" set cursor in longer files always in the midle of window
+set so=50
+
+" fonts
 "set guifont=Inconsolata\ Medium\ 10
 set guifont=Terminus\ 12
 "set guifont=Terminus\ Regular\ 14
@@ -72,12 +75,12 @@ set guifont=Terminus\ 12
 "set guifont=Monaco\ 11
 "set guifont=Monospace\ 11
 "
-let g:Powerline_symbols = 'fancy'
 
 set title
 set mousehide
 set hlsearch
 set ignorecase
+set smartcase
 set incsearch
 
 set foldenable
@@ -85,28 +88,25 @@ set foldmethod=indent
 set foldignore=
 set foldlevel=10
 
+set lazyredraw
+set magic
+
 "set tags=~/workspace/**/tags
 set laststatus=2
 set statusline=%F%=[%v][%l/%L][%p%%][%{&encoding}]%y
 set cursorline
 set wak=no
+
 au InsertEnter * hi StatusLine guifg=#00CCFF guibg=#444444 gui=bold
 au InsertLeave * hi StatusLine guifg=#f6f3e8 guibg=#444444 gui=reverse
 
-hi Directory guifg=#FF0000 ctermfg=red
-" Make ',e' (in normal mode) give a prompt for opening files
-" in the same dir as the current buffer's file.
-if has("unix")
-    map ,e :e <C-R>=expand("%:p:h") . "/" <CR>
-else
-    map ,e :e <C-R>=expand("%:p:h") . "\\" <CR>
-endif
-"For vimrc edit/reload"
-nmap <Leader>s :source $MYVIMRC<CR>
-nmap <Leader>v :e $MYVIMRC<CR>
-nmap <Leader>c :e $HOME/.vim/colors/blackboard.vim<CR>
-map <leader>d :execute 'NERDTreeFromBookmark w'<CR>
-map <leader>m :execute 'NERDTreeFromBookmark m'<CR>
+"hi Directory guifg=#FF0000 ctermfg=red
+
+nmap ,e :e <C-R>=expand("%:p:h") . "/" <CR>
+"nmap <Leader>c :e $HOME/.vim/colors/blackboard.vim<CR>
+
+nmap <Leader>s :split<CR>
+nmap <Leader>v :vsplit<CR>
 map <A-n> :tabnew<CR>
 map <C-left> :tabp<CR>
 map <C-right> :tabn<CR>
@@ -116,7 +116,6 @@ nnoremap <a-up> <C-W><C-k>
 nnoremap <a-down> <C-W><C-j>
 "map <C-w> :tabclose<CR>
 map <A-w> :bd<CR>
-map <leader>m :execute 'NERDTreeFromBookmark m'<CR>
 "nnoremap <silent> <F2> :FufFileWithCurrentBufferDir<CR>
 " Press F4 to toggle highlighting on/off.
 "nnoremap <silent> <F3> :!python $HOME/.vim/plugin/pep8.py --show-source --statistics %<CR>
@@ -133,14 +132,14 @@ nnoremap <silent> <F12> :!python $HOME/.vim/shortcuts.py<CR>
 set makeprg=tidy\ -quiet\ -errors\ %
 set errorformat=line\ %l\ column\ %v\ -\ %m
 
-"Moving lines like in NetBeans (original keys -> <M-j>)"
+" Moving lines like in NetBeans (original keys -> <M-j>)"
 nnoremap <c-down> mz:m+<CR>`z==
 nnoremap <c-up> mz:m-2<CR>`z==
 inoremap <c-down> <Esc>:m+<CR>==gi
 inoremap <c-up> <Esc>:m-2<CR>==gi
 vnoremap <s-down> :m'>+<CR>gv=`<my`>mzgv`yo`z
 vnoremap <c-up> :m'<-2<CR>gv=`>my`<mzgv`yo`z
-"Copying line up or down"
+" Copying line up or down"
 nnoremap <c-s-up> yypkk<CR>
 nnoremap <c-s-down> yypk<CR>
 " traditional ctrl+s for saving :)"
@@ -151,10 +150,13 @@ vnoremap <c-S> :w<CR>
 inoremap <c-space> <c-N>
 nnoremap <c-tab> <c-w>w
 nnoremap <c-s-tab> <c-s-w>w
-"close all opened tabs and vim
+"close all opened tabs and vim (like ZZ)
 nnoremap <c-esc> :tabonly<CR>:q!<CR>
+
 " Show trailing whitepace and spaces before a tab:
+autocmd Syntax * syn match ExtraWhitespace /\s\+$\| \+\ze\t/ 
 "match ExtraWhitespace /\s\+$\| \+\ze\t/
+"
 nm d<F3> lF<df>
 nm d<F3> lF d2f"
 " Left move attribut
@@ -163,6 +165,7 @@ nm <C-S-Left> d<F3>
 nm <C-S-Right> d<F3>/ \\|><cr>:nohl<cr>P
 
 "let g:pydiction_location = '/home/ilmarik/.vim/ftplugin/pydiction/complete-dict'
+let g:Powerline_symbols = 'fancy'
 let g:airline_powerline_fonts = 1
 
 function ShowSpaces(...)
@@ -213,5 +216,10 @@ autocmd filetype c nnoremap <F6> :make!<cr>
 
 """""""""""""""""""""""""""""""""""""""""""""
 let g:ycm_global_ycm_extra_conf = "~/.vim/.ycm_extra_conf.py"
+
+au FocusLost * :set relativenumber!
+au FocusGained * :set relativenumber
+autocmd InsertEnter * :set relativenumber!
+autocmd InsertLeave * :set relativenumber
 
 call pathogen#infect()

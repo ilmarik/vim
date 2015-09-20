@@ -31,6 +31,18 @@ vim-fugitive
 fugitive.vim: a Git wrapper so awesome, it should be illegal http://www.vim.org/scripts/script.php?script_id=2975
 https://github.com/tpope/vim-fugitive.git
 
+vim-gitgutter
+A Vim plugin which shows a git diff in the gutter (sign column) and stages/reverts hunks.
+https://github.com/airblade/vim-gitgutter.git
+
+jedi-vim
+Using the jedi autocompletion library for VIM.
+https://github.com/davidhalter/jedi-vim.git
+
+supertab
+Perform all your vim insert mode completions with Tab
+https://github.com/ervandew/supertab.git
+
 vimpdb
 Pdb and Vim integration
 https://github.com/gotcha/vimpdb.git
